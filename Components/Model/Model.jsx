@@ -19,7 +19,7 @@ const Model = ({
 }) => {
   //USESTATE
   const [name, setName] = useState("");
-  const [accountAddress, setAccountAddress] = useState("");
+  const [userAddress, setUserAddress] = useState(address);
 
   const { loading } = useContext(ChatAppContect);
   return (
@@ -57,12 +57,12 @@ const Model = ({
                 <input
                   type="text"
                   placeholder={address || "Enter address.."}
-                  onChange={(e) => setAccountAddress(e.target.value)}
+                  onChange={(e) => setUserAddress(e.target.value)}
                 />
               </div>
 
               <div className={Style.Model_box_right_name_btn}>
-                <button onClick={() => functionName({ name, accountAddress })}>
+                <button onClick={() => functionName({ name, userAddress })}>
                   {""}
                   <Image src={images.send} alt="send" width={30} height={30} />
                   {""}

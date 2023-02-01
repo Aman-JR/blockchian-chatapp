@@ -64,13 +64,16 @@ export const ChatAppProvider = ({ children }) => {
   };
 
   //CREATE ACCOUNT
-  const createAccount = async ({ name, accountAddress }) => {
+  const createAccount = async ({ name }) => {
+    console.log(name, account);
     try {
-      if (!name || !accountAddress)
+      if (!name || !account)
         return setError("Name And Account Address, cannot be empty");
 
       const contract = await connectingWithContract();
+      console.log(contract);
       const getCreatedUser = await contract.createAccount(name);
+
       setLoading(true);
       await getCreatedUser.wait();
       setLoading(false);
@@ -81,13 +84,11 @@ export const ChatAppProvider = ({ children }) => {
   };
 
   //ADD YOUR FRIENDS
-  const addFriends = async ({ name, accountAddress }) => {
-    console.log(name, accountAddress);
+  const addFriends = async ({ name, userAddress }) => {
     try {
-      if (!name || !accountAddress) return setError("Please provide data");
-
+      if (!name || !userAddress) return setError("Please provide data");
       const contract = await connectingWithContract();
-      const addMyFriend = await contract.addFriend(accountAddress, name);
+      const addMyFriend = await contract.addFriend(userAddress, name);
       setLoading(true);
       await addMyFriend.wait();
       setLoading(false);
@@ -100,6 +101,7 @@ export const ChatAppProvider = ({ children }) => {
 
   //SEND MESSAGE TO YOUR FRIEND
   const sendMessage = async ({ msg, address }) => {
+    console.log(msg, address);
     try {
       if (!msg || !address) return setError("Please Type your Message");
 
